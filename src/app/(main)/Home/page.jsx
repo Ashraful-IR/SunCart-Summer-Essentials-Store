@@ -1,12 +1,14 @@
+import ExtraSection from "@/components/UI/ExtraSection";
+import HeroPage from "@/components/UI/HeroSection";
+import PopularProducts from "@/components/UI/PopuarProd";
 import React from "react";
 
 const HomePage = () => {
   return (
     <div>
-      <h1 className="text-4xl font-bold">Welcome to My Next.js App!</h1>
-      <p className="mt-4 text-lg text-gray-600">
-        This is a simple page to demonstrate Next.js features.
-      </p>
+      <HeroPage />
+      <PopularProducts />
+      <ExtraSection />
     </div>
   );
 };
