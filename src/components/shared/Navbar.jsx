@@ -9,7 +9,7 @@ const NavPage = () => {
     <>
       <NavLink href="/">Home</NavLink>
       <NavLink href="/Product">Products</NavLink>
-      <NavLink href="/contact">My Profile</NavLink>
+      <NavLink href="/MyProfile">My Profile</NavLink>
     </>
   );
 
