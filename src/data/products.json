@@ -1,62 +1,68 @@
 [
   {
     "id": 1,
-    "name": "Sunscreen SPF 50",
-    "price": 24.99,
-    "originalPrice": 49.99,
-    "rating": 4.8,
-    "reviews": 324,
-    "image": "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=500&h=500&fit=crop",
-    "category": "skincare"
+    "name": "UV Protection Sunglasses",
+    "brand": "SunShade",
+    "price": 44.99,
+    "rating": 4.7,
+    "stock": 25,
+    "description": "Stylish UV protection sunglasses perfect for summer outings. Blocks 100% of harmful UV rays.",
+    "image": "https://i.ibb.co.com/s92f5vbP/images-1.jpg",
+    "category": "Accessories"
   },
   {
     "id": 2,
-    "name": "Cooling Summer Hat",
-    "price": 34.99,
-    "originalPrice": 69.99,
-    "rating": 4.6,
-    "reviews": 156,
-    "image": "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=500&h=500&fit=crop",
-    "category": "accessories"
+    "name": "Sunscreen SPF 50",
+    "brand": "SkinGuard",
+    "price": 24.99,
+    "rating": 4.8,
+    "stock": 50,
+    "description": "Premium broad-spectrum sunscreen SPF 50. Water-resistant for up to 80 minutes.",
+    "image": "https://i.ibb.co.com/s92f5vbP/images-2.jpg",
+    "category": "Skincare"
   },
   {
     "id": 3,
-    "name": "Hydration Water Bottle",
-    "price": 19.99,
-    "originalPrice": 39.99,
-    "rating": 4.9,
-    "reviews": 512,
-    "image": "https://images.unsplash.com/photo-1602143407151-7e406dc6835a?w=500&h=500&fit=crop",
-    "category": "accessories"
+    "name": "Cooling Summer Hat",
+    "brand": "HatStyle",
+    "price": 34.99,
+    "rating": 4.6,
+    "stock": 35,
+    "description": "Lightweight and breathable summer hat with UV protection. Keeps you cool all day long.",
+    "image": "https://i.ibb.co.com/s92f5vbP/images-3.jpg",
+    "category": "Accessories"
   },
   {
     "id": 4,
-    "name": "UV Protection Sunglasses",
-    "price": 44.99,
-    "originalPrice": 89.99,
-    "rating": 4.7,
-    "reviews": 289,
-    "image": "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=500&h=500&fit=crop",
-    "category": "accessories"
+    "name": "Hydration Water Bottle",
+    "brand": "AquaFresh",
+    "price": 19.99,
+    "rating": 4.9,
+    "stock": 60,
+    "description": "Insulated stainless steel water bottle keeps drinks cold for 24 hours. Eco-friendly design.",
+    "image": "https://i.ibb.co.com/s92f5vbP/images-4.jpg",
+    "category": "Essentials"
   },
   {
     "id": 5,
     "name": "Lightweight Beach Towel",
+    "brand": "BeachCo",
     "price": 14.99,
-    "originalPrice": 29.99,
     "rating": 4.5,
-    "reviews": 198,
-    "image": "https://images.unsplash.com/photo-1552820728-8ac41f1ce891?w=500&h=500&fit=crop",
-    "category": "essentials"
+    "stock": 45,
+    "description": "Quick-drying microfiber beach towel. Compact and travel-friendly with vibrant colors.",
+    "image": "https://i.ibb.co.com/s92f5vbP/images-5.jpg",
+    "category": "Essentials"
   },
   {
     "id": 6,
     "name": "Cooling Gel Pack Set",
+    "brand": "CoolZone",
     "price": 16.99,
-    "originalPrice": 33.99,
     "rating": 4.7,
-    "reviews": 267,
-    "image": "https://images.unsplash.com/photo-1584622181563-430f63602d4b?w=500&h=500&fit=crop",
-    "category": "essentials"
+    "stock": 40,
+    "description": "Reusable gel packs for instant cooling relief. Perfect for picnics, sports, and travel.",
+    "image": "https://i.ibb.co.com/s92f5vbP/images-6.jpg",
+    "category": "Essentials"
   }
 ]
