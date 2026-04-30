@@ -1,12 +1,16 @@
-import React from 'react';
+"use client";
 
-const ProfileEditPage = () => {
-    return (
-        <div>
-            <h1>Edit Profile Page</h1>
-            <p>This is where you can edit your profile information.</p>
-        </div>
-    );
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+
+const EditProfileRedirect = () => {
+  const router = useRouter();
+
+  useEffect(() => {
+    router.push("/MyProfile/Edit");
+  }, [router]);
+
+  return null;
 };
 
-export default ProfileEditPage;
+export default EditProfileRedirect;
