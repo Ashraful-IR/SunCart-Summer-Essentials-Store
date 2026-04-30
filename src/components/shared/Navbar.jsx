@@ -1,15 +1,21 @@
 import Link from "next/link";
 import { BiSolidCircle } from "react-icons/bi";
 import { HiOutlineMenu } from "react-icons/hi";
-import { FaUserCircle } from "react-icons/fa";
+import { FaHome, FaProductHunt, FaUserCircle,  } from "react-icons/fa";
 import NavLink from "../NavLink";
 
 const NavPage = () => {
   const menuItems = (
     <>
-      <NavLink href="/">Home</NavLink>
-      <NavLink href="/Product">Products</NavLink>
-      <NavLink href="/MyProfile">My Profile</NavLink>
+      <NavLink href="/" className="flex items-center gap-2">
+        <FaHome /> Home
+      </NavLink>
+      <NavLink href="/Product" className="flex items-center gap-2">
+        <FaProductHunt /> Products
+      </NavLink>
+      <NavLink href="/MyProfile" className="flex items-center gap-2">
+        <FaUserCircle /> My Profile
+      </NavLink>
     </>
   );
 
