@@ -1,13 +1,17 @@
 import ExtraSection from "@/components/UI/ExtraSection";
 import HeroPage from "@/components/UI/HeroSection";
-import PopularProducts from "@/components/UI/PopuarProd";
+import HeroSlider from "@/components/UI/HeroSlider";
+import PopularProducts from "@/components/UI/PopularProd";
+import ProductCard from "@/components/UI/ProductCard";
+import { getData } from "@/lib/data";
 import React from "react";
 
-const HomePage = () => {
+const HomePage = async () => {
+  const products = await getData();
   return (
     <div>
-      <HeroPage />
-      <PopularProducts />
+      <HeroSlider />
+      <PopularProducts products={products} />
       <ExtraSection />
     </div>
   );
