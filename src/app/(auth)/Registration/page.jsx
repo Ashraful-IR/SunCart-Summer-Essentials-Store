@@ -37,6 +37,7 @@ const RegPage = () => {
       image,
     });
     if (error) {
+      console.error("[Registration Error]:", error);
       toast.error(`Registration failed: ${error.message}`, {
         position: "top-right",
         autoClose: 5000,
