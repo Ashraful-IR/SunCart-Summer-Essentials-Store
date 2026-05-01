@@ -15,25 +15,55 @@ import {
 import { AiOutlinePhone } from "react-icons/ai";
 import { BiSolidCircle } from "react-icons/bi";
 import TextField from "@/components/UI/TextField";
+import { authClient } from "@/lib/auth-client";
+import { useRouter } from "next/navigation";
+import { Bounce, toast } from "react-toastify";
 
-
-const RegPage =  () => {
-  const handleSubmit = async(e) => {
+const RegPage = () => {
+  const route = useRouter();
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // Handle form submission logic here (use FormData for safety)
-    const formData = new FormData(e.target);
-    const fullName = formData.get("fullName") || "";
-    const email = formData.get("email") || "";
-    const password = formData.get("password") || "";
-    const confirmPassword = formData.get("confirmPassword") || "";
-    const profilePhoto = formData.get("profilePhoto") || "";
-    console.log("Full Name:", fullName);
-    console.log("Email:", email);
-    console.log("Profile Photo URL:", profilePhoto);
+    const name = e.target.fullName.value;
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    const confirmPassword = e.target.confirmPassword.value;
+    const image = e.target.profilePhoto.value;
 
-
-
-    
+    const { data, error } = await authClient.signUp.email({
+      email,
+      password,
+      name,
+      image,
+    });
+    if (error) {
+      toast.error(`Registration failed: ${error.message}`, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+    } else {
+      toast.success("Registration successful! Redirecting to login...", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+    }
+    if (!error) {
+      route.push("/LogIn");
+    }
   };
   return (
     <div className="min-h-screen bg-linear-to-br from-blue-50 via-orange-50 to-amber-50 py-6 px-3 sm:py-8 sm:px-4 md:py-12 md:px-6">

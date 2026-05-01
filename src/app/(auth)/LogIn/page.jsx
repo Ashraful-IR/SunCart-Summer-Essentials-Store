@@ -6,9 +6,13 @@ import { BiSolidCircle } from "react-icons/bi";
 import { FaShieldAlt } from "react-icons/fa";
 import { Fa0, FaFacebook, FaGoogle } from "react-icons/fa6";
 import TextField from "@/components/UI/TextField";
+import { authClient } from "@/lib/auth-client";
+import { Bounce, toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 const LogPage = () => {
-  const handleSubmit = (e) => {
+  const route = useRouter();
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // Handle form submission logic here
 
@@ -16,6 +20,27 @@ const LogPage = () => {
     const password = e.target.password.value;
     console.log("Email:", email);
     console.log("Password:", password);
+
+    const { data, error } = await authClient.signIn.email({
+      email,
+      password,
+      
+    });
+    toast("Login successful!", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+    });
+
+    if (!error) {
+      route.push("/");
+    }
   };
   return (
     <div className="min-h-screen bg-linear-to-br from-blue-50 via-orange-50 to-amber-50 flex items-center justify-center py-6 px-3 sm:py-8 sm:px-4 md:py-12 md:px-6">
