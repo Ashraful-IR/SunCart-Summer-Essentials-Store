@@ -12,17 +12,20 @@ const HeroSlider = () => {
   const slides = [
     {
       id: 1,
-      image: "https://i.ibb.co.com/bMmZLNFw/e6369569fcc6e4dfa55c5d95f0aa45ed.jpg",
+      image:
+        "https://i.ibb.co.com/bMmZLNFw/e6369569fcc6e4dfa55c5d95f0aa45ed.jpg",
       title: "Summer Essentials",
     },
     {
       id: 2,
-      image: "https://i.ibb.co.com/nNbtX8zr/154fa541587cdab59bbe15a3184b7372.jpg",
+      image:
+        "https://i.ibb.co.com/nNbtX8zr/154fa541587cdab59bbe15a3184b7372.jpg",
       title: "Premium Quality",
     },
     {
       id: 3,
-      image: "https://i.ibb.co.com/pBDHTmtH/d78d39e685b2bcae481356d032d1196c.jpg",
+      image:
+        "https://i.ibb.co.com/pBDHTmtH/d78d39e685b2bcae481356d032d1196c.jpg",
       title: "Best Prices",
     },
   ];

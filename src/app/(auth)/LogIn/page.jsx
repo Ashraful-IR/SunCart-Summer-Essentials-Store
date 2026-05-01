@@ -1,10 +1,22 @@
+"use client";
+
 import Link from "next/link";
 import React from "react";
 import { BiSolidCircle } from "react-icons/bi";
 import { FaShieldAlt } from "react-icons/fa";
 import { Fa0, FaFacebook, FaGoogle } from "react-icons/fa6";
+import TextField from "@/components/UI/TextField";
 
 const LogPage = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Handle form submission logic here
+
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    console.log("Email:", email);
+    console.log("Password:", password);
+  };
   return (
     <div className="min-h-screen bg-linear-to-br from-blue-50 via-orange-50 to-amber-50 flex items-center justify-center py-6 px-3 sm:py-8 sm:px-4 md:py-12 md:px-6">
       <div className="max-w-7xl mx-auto w-full">
@@ -106,28 +118,34 @@ const LogPage = () => {
                 </p>
               </div>
 
-              <form className="space-y-3 sm:space-y-4">
-                <div className="space-y-2">
-                  <label className="block text-xs sm:text-sm font-medium text-gray-700">
-                    Email Address
-                  </label>
-                  <input
-                    type="email"
-                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition"
-                    placeholder="you@example.com"
-                  />
-                </div>
+              <form className="space-y-3 sm:space-y-4" onSubmit={handleSubmit}>
+                <TextField isRequired name="email" type="email">
+                  <div className="space-y-2">
+                    <label className="block text-xs sm:text-sm font-medium text-gray-700">
+                      Email Address
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition"
+                      placeholder="you@example.com"
+                    />
+                  </div>
+                </TextField>
 
-                <div className="space-y-2">
-                  <label className="block text-xs sm:text-sm font-medium text-gray-700">
-                    Password
-                  </label>
-                  <input
-                    type="password"
-                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition"
-                    placeholder="••••••••"
-                  />
-                </div>
+                <TextField isRequired name="password" type="password">
+                  <div className="space-y-2">
+                    <label className="block text-xs sm:text-sm font-medium text-gray-700">
+                      Password
+                    </label>
+                    <input
+                      type="password"
+                      name="password"
+                      className="w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition"
+                      placeholder="••••••••"
+                    />
+                  </div>
+                </TextField>
 
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0 text-xs sm:text-sm">
                   <label className="flex items-center gap-2 text-gray-700 cursor-pointer">

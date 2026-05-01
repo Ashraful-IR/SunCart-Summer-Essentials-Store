@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import React from "react";
 import { FaGoogle, FaFacebook, FaShieldAlt } from "react-icons/fa";
@@ -13,8 +14,27 @@ import {
 } from "react-icons/md";
 import { AiOutlinePhone } from "react-icons/ai";
 import { BiSolidCircle } from "react-icons/bi";
+import TextField from "@/components/UI/TextField";
 
-const RegPage = () => {
+
+const RegPage =  () => {
+  const handleSubmit = async(e) => {
+    e.preventDefault();
+    // Handle form submission logic here (use FormData for safety)
+    const formData = new FormData(e.target);
+    const fullName = formData.get("fullName") || "";
+    const email = formData.get("email") || "";
+    const password = formData.get("password") || "";
+    const confirmPassword = formData.get("confirmPassword") || "";
+    const profilePhoto = formData.get("profilePhoto") || "";
+    console.log("Full Name:", fullName);
+    console.log("Email:", email);
+    console.log("Profile Photo URL:", profilePhoto);
+
+
+
+    
+  };
   return (
     <div className="min-h-screen bg-linear-to-br from-blue-50 via-orange-50 to-amber-50 py-6 px-3 sm:py-8 sm:px-4 md:py-12 md:px-6">
       <div className="max-w-7xl mx-auto">
@@ -118,53 +138,62 @@ const RegPage = () => {
                 </p>
               </div>
 
-              <form className="space-y-3 sm:space-y-4">
-                <div className="space-y-2">
-                  <label className="block text-xs sm:text-sm font-medium text-gray-700">
-                    Full Name
-                  </label>
-                  <div className="relative">
-                    <MdPerson className="absolute left-3 top-3.5 text-gray-400 w-5 h-5" />
-                    <input
-                      type="text"
-                      className="w-full px-4 py-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition"
-                      placeholder="John Doe"
-                    />
+              <form className="space-y-3 sm:space-y-4" onSubmit={handleSubmit}>
+                <TextField isRequired name="fullName" type="text">
+                  <div className="space-y-2">
+                    <label className="block text-xs sm:text-sm font-medium text-gray-700">
+                      Full Name
+                    </label>
+                    <div className="relative">
+                      <MdPerson className="absolute left-3 top-3.5 text-gray-400 w-5 h-5" />
+                      <input
+                        type="text"
+                        name="fullName"
+                        className="w-full px-4 py-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition"
+                        placeholder="John Doe"
+                      />
+                    </div>
                   </div>
-                </div>
+                </TextField>
+
+                <TextField isRequired name="email" type="email">
+                  <div className="space-y-2">
+                    <label className="block text-xs sm:text-sm font-medium text-gray-700">
+                      Email Address
+                    </label>
+                    <div className="relative">
+                      <MdEmail className="absolute left-3 top-3.5 text-gray-400 w-5 h-5" />
+                      <input
+                        type="email"
+                        name="email"
+                        className="w-full px-4 py-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition"
+                        placeholder="you@example.com"
+                      />
+                    </div>
+                  </div>
+                </TextField>
+
+                <TextField name="profilePhoto" type="url">
+                  <div className="space-y-2">
+                    <label className="block text-xs sm:text-sm font-medium text-gray-700">
+                      Profile Photo URL
+                    </label>
+                    <div className="relative">
+                      <MdImage className="absolute left-3 top-3.5 text-gray-400 w-5 h-5" />
+                      <input
+                        type="url"
+                        name="profilePhoto"
+                        className="w-full px-4 py-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition"
+                        placeholder="https://example.com/photo.jpg"
+                      />
+                    </div>
+                    <p className="text-xs text-gray-500">
+                      Paste the link to your profile photo (JPG, PNG)
+                    </p>
+                  </div>
+                </TextField>
 
                 <div className="space-y-2">
-                  <label className="block text-xs sm:text-sm font-medium text-gray-700">
-                    Email Address
-                  </label>
-                  <div className="relative">
-                    <MdEmail className="absolute left-3 top-3.5 text-gray-400 w-5 h-5" />
-                    <input
-                      type="email"
-                      className="w-full px-4 py-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition"
-                      placeholder="you@example.com"
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <label className="block text-xs sm:text-sm font-medium text-gray-700">
-                    Profile Photo URL
-                  </label>
-                  <div className="relative">
-                    <MdImage className="absolute left-3 top-3.5 text-gray-400 w-5 h-5" />
-                    <input
-                      type="url"
-                      className="w-full px-4 py-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition"
-                      placeholder="https://example.com/photo.jpg"
-                    />
-                  </div>
-                  <p className="text-xs text-gray-500">
-                    Paste the link to your profile photo (JPG, PNG)
-                  </p>
-                </div>
-
-                {/* <div className="space-y-2">
                   <label className="block text-xs sm:text-sm font-medium text-gray-700">
                     Password
                   </label>
@@ -172,6 +201,7 @@ const RegPage = () => {
                     <MdLock className="absolute left-3 top-3.5 text-gray-400 w-5 h-5" />
                     <input
                       type="password"
+                      name="password"
                       className="w-full px-4 py-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition"
                       placeholder="••••••••"
                     />
@@ -189,11 +219,12 @@ const RegPage = () => {
                     <MdLock className="absolute left-3 top-3.5 text-gray-400 w-5 h-5" />
                     <input
                       type="password"
+                      name="confirmPassword"
                       className="w-full px-4 py-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition"
                       placeholder="••••••••"
                     />
                   </div>
-                </div> */}
+                </div>
 
                 <div className="flex items-start gap-2 pt-2">
                   <input
