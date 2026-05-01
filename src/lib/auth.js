@@ -5,28 +5,28 @@ import { memoryAdapter } from "@better-auth/memory-adapter";
 
 const mongoUri = process.env.MONGODB_URI;
 
-if (!mongoUri) {
-  throw new Error("MONGODB_URI is not set");
-}
+const client = mongoUri
+  ? new MongoClient(mongoUri, {
+      serverSelectionTimeoutMS: 3000,
+      connectTimeoutMS: 3000,
+    })
+  : null;
 
-const client = new MongoClient(mongoUri, {
-  serverSelectionTimeoutMS: 3000,
-  connectTimeoutMS: 3000,
-});
-
-const mongoReady = await client
-  .connect()
-  .then(async () => {
-    await client.db().admin().ping();
-    return true;
-  })
-  .catch((error) => {
-    console.warn(
-      "MongoDB is unavailable, falling back to in-memory auth storage.",
-      error.message
-    );
-    return false;
-  });
+const mongoReady = client
+  ? await client
+      .connect()
+      .then(async () => {
+        await client.db().admin().ping();
+        return true;
+      })
+      .catch((error) => {
+        console.warn(
+          "MongoDB is unavailable, falling back to in-memory auth storage.",
+          error.message
+        );
+        return false;
+      })
+  : false;
 
 const createMemoryDatabase = (options) => {
   const tables = getAuthTables(options);
