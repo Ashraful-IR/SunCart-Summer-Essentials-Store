@@ -54,6 +54,36 @@ This removes the network dependency and allows `next build` to complete without 
 
 ## Other observations (not fixed)
 
+## Build Failure: `MONGODB_URI` missing while collecting route data
+
+### What happened
+After fixing the Google Fonts network fetch issue, `npm run build` proceeded further but then failed during the “Collecting page data” step.
+
+Next.js evaluates route modules during build to collect data. Importing `@/lib/auth` inside `src/app/api/auth/[...all]/route.js` triggers `src/lib/auth.js` module evaluation.
+
+The previous version of `src/lib/auth.js` threw immediately if `process.env.MONGODB_URI` was not set, which breaks `next build` in environments where you haven't configured database env vars (typical in CI).
+
+### Where it was triggered
+- File: `src/lib/auth.js`
+- Import chain: `src/app/api/auth/[...all]/route.js` → `@/lib/auth`
+
+### Error output (captured)
+```
+Error: MONGODB_URI is not set
+
+> Build error occurred
+Error: Failed to collect page data for /api/auth/[...all]
+```
+
+### Fix applied
+`src/lib/auth.js` no longer throws at import time when `MONGODB_URI` is missing.
+
+Instead:
+- If `MONGODB_URI` is present, it attempts to connect and use MongoDB.
+- If it is missing (or MongoDB is unreachable), it cleanly falls back to the in-memory adapter.
+
+This keeps development/CI builds working without requiring DB secrets.
+
 ### `next.config.mjs` image host looks suspicious
 `next.config.mjs` includes `hostname: 'i.ibb.co.com'`. The common ibb host is `i.ibb.co` (without `.com`).
 
@@ -63,4 +93,3 @@ If images fail to load at runtime, this is a likely cause. I did not change it b
 `package.json` lists `"mongobd"`, which looks like a typo of `mongodb`.
 
 You already have `mongodb` listed, so `mongobd` may be an accidental dependency. Removing it could be considered later, but it’s unrelated to the build failure above.
-
