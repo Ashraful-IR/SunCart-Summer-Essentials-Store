@@ -1,10 +1,32 @@
+"use client";
+
 import Link from "next/link";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { BiSolidCircle } from "react-icons/bi";
 import { HiOutlineMenu } from "react-icons/hi";
-import { FaHome, FaProductHunt, FaUserCircle,  } from "react-icons/fa";
+import {
+  FaHome,
+  FaProductHunt,
+  FaUserCircle,
+} from "react-icons/fa";
+import { authClient } from "../../lib/auth-client";
 import NavLink from "../NavLink";
 
 const NavPage = () => {
+  const router = useRouter();
+  const { data: session } = authClient.useSession();
+  const user = session?.user;
+  const isLoggedIn = Boolean(user);
+
+  const handleLogout = async () => {
+    await authClient.signOut();
+    router.refresh();
+  };
+
+  const userInitial =
+    user?.name?.trim()?.[0] || user?.email?.trim()?.[0] || "U";
+
   const menuItems = (
     <>
       <NavLink href="/" className="flex items-center gap-2">
@@ -37,20 +59,53 @@ const NavPage = () => {
           </div>
 
           <div className="flex items-center gap-2 sm:gap-3">
-            <Link
-              href="/contact"
-              className="p-2 hover:bg-orange-50 rounded-full transition"
-              title="Profile"
-            >
-              <FaUserCircle className="w-6 h-6 sm:w-8 sm:h-8 text-orange-500 hover:text-orange-600" />
-            </Link>
-            
-            <Link
-              href="/LogIn"
-              className="hidden sm:block px-4 sm:px-5 py-2 sm:py-2.5 bg-linear-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white text-sm font-semibold rounded-lg transition shadow-md hover:shadow-lg"
-            >
-              Log In
-            </Link>
+            {isLoggedIn ? (
+              <>
+                <Link
+                  href="/MyProfile"
+                  className="flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-full border border-orange-200 bg-orange-50 overflow-hidden shadow-sm"
+                  title={user?.name || "My Profile"}
+                >
+                  {user?.image ? (
+                      <Image
+                      src={user.image}
+                      alt={user?.name || "User avatar"}
+                        width={44}
+                        height={44}
+                        className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <span className="text-sm font-semibold text-orange-600">
+                      {userInitial}
+                    </span>
+                  )}
+                </Link>
+
+                <button
+                  type="button"
+                  onClick={handleLogout}
+                  className="hidden sm:inline-flex px-4 sm:px-5 py-2 sm:py-2.5 bg-gray-900 hover:bg-gray-800 text-white text-sm font-semibold rounded-lg transition shadow-md hover:shadow-lg"
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  href="/LogIn"
+                  className="hidden sm:block px-4 sm:px-5 py-2 sm:py-2.5 border border-orange-200 text-orange-700 hover:bg-orange-50 text-sm font-semibold rounded-lg transition"
+                >
+                  Log In
+                </Link>
+
+                <Link
+                  href="/Registration"
+                  className="hidden sm:block px-4 sm:px-5 py-2 sm:py-2.5 bg-linear-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white text-sm font-semibold rounded-lg transition shadow-md hover:shadow-lg"
+                >
+                  Register
+                </Link>
+              </>
+            )}
 
             <details className="md:hidden">
               <summary className="p-2 hover:bg-gray-100 rounded-lg transition text-gray-700 cursor-pointer list-none">
@@ -64,16 +119,51 @@ const NavPage = () => {
                   <Link href="/Product" className="px-4 py-3 hover:bg-orange-50 hover:text-orange-600 transition border-b border-gray-100 flex items-center gap-2">
                     Products
                   </Link>
-                  <Link href="/contact" className="px-4 py-3 hover:bg-orange-50 hover:text-orange-600 transition border-b border-gray-100 flex items-center gap-2">
-                    <FaUserCircle className="w-4 h-4" />
-                    My Profile
-                  </Link>
-                  <Link
-                    href="/LogIn"
-                    className="sm:hidden block px-4 py-3 bg-linear-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-semibold transition text-center rounded-b-lg"
-                  >
-                    Log In
-                  </Link>
+                  {isLoggedIn ? (
+                    <>
+                      <Link
+                        href="/MyProfile"
+                        className="px-4 py-3 hover:bg-orange-50 hover:text-orange-600 transition border-b border-gray-100 flex items-center gap-3"
+                      >
+                        {user?.image ? (
+                            <Image
+                            src={user.image}
+                            alt={user?.name || "User avatar"}
+                              width={28}
+                              height={28}
+                            className="w-7 h-7 rounded-full object-cover border border-orange-200"
+                          />
+                        ) : (
+                          <span className="w-7 h-7 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center text-sm font-semibold border border-orange-200">
+                            {userInitial}
+                          </span>
+                        )}
+                        My Profile
+                      </Link>
+                      <button
+                        type="button"
+                        onClick={handleLogout}
+                        className="sm:hidden block w-full px-4 py-3 bg-gray-900 hover:bg-gray-800 text-white font-semibold transition text-center rounded-b-lg"
+                      >
+                        Logout
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <Link
+                        href="/LogIn"
+                        className="sm:hidden block px-4 py-3 border-t border-gray-100 hover:bg-orange-50 hover:text-orange-600 transition text-center font-semibold"
+                      >
+                        Log In
+                      </Link>
+                      <Link
+                        href="/Registration"
+                        className="sm:hidden block px-4 py-3 bg-linear-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-semibold transition text-center rounded-b-lg"
+                      >
+                        Register
+                      </Link>
+                    </>
+                  )}
                 </div>
               </div>
             </details>
