@@ -5,11 +5,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { BiSolidCircle } from "react-icons/bi";
 import { HiOutlineMenu } from "react-icons/hi";
-import {
-  FaHome,
-  FaProductHunt,
-  FaUserCircle,
-} from "react-icons/fa";
+import { FaHome, FaProductHunt, FaUserCircle } from "react-icons/fa";
 import { authClient } from "../../lib/auth-client";
 import NavLink from "../NavLink";
 
@@ -66,19 +62,7 @@ const NavPage = () => {
                   className="flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-full border border-orange-200 bg-orange-50 overflow-hidden shadow-sm"
                   title={user?.name || "My Profile"}
                 >
-                  {user?.image ? (
-                      <Image
-                      src={user.image}
-                      alt={user?.name || "User avatar"}
-                        width={44}
-                        height={44}
-                        className="w-full h-full object-cover"
-                    />
-                  ) : (
-                    <span className="text-sm font-semibold text-orange-600">
-                      {userInitial}
-                    </span>
-                  )}
+                  <FaUserCircle className="w-5 h-5 text-gray-700" />
                 </Link>
 
                 <button
@@ -113,10 +97,16 @@ const NavPage = () => {
               </summary>
               <div className="absolute right-3 sm:right-4 md:right-6 top-16 sm:top-20 bg-white border border-gray-200 rounded-lg shadow-lg mt-2 min-w-48 z-50">
                 <div className="flex flex-col text-sm font-medium text-gray-700">
-                  <Link href="/" className="px-4 py-3 hover:bg-orange-50 hover:text-orange-600 transition border-b border-gray-100 flex items-center gap-2">
+                  <Link
+                    href="/"
+                    className="px-4 py-3 hover:bg-orange-50 hover:text-orange-600 transition border-b border-gray-100 flex items-center gap-2"
+                  >
                     Home
                   </Link>
-                  <Link href="/Product" className="px-4 py-3 hover:bg-orange-50 hover:text-orange-600 transition border-b border-gray-100 flex items-center gap-2">
+                  <Link
+                    href="/Product"
+                    className="px-4 py-3 hover:bg-orange-50 hover:text-orange-600 transition border-b border-gray-100 flex items-center gap-2"
+                  >
                     Products
                   </Link>
                   {isLoggedIn ? (
@@ -126,11 +116,11 @@ const NavPage = () => {
                         className="px-4 py-3 hover:bg-orange-50 hover:text-orange-600 transition border-b border-gray-100 flex items-center gap-3"
                       >
                         {user?.image ? (
-                            <Image
+                          <Image
                             src={user.image}
                             alt={user?.name || "User avatar"}
-                              width={28}
-                              height={28}
+                            width={28}
+                            height={28}
                             className="w-7 h-7 rounded-full object-cover border border-orange-200"
                           />
                         ) : (

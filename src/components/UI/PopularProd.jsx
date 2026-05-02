@@ -86,7 +86,7 @@ const PopularProducts = ({ products = [] }) => {
 
                 {/* Button */}
                 <Link
-                  href={`/product/${product.id}`}
+                  href={`/Product/${product.id}`}
                   className="mt-4 group/btn flex items-center justify-center gap-2 w-full rounded-2xl bg-linear-to-r from-orange-400 to-amber-400 px-5 py-3.5 text-sm font-bold text-white shadow-lg shadow-orange-200/60 transition-all duration-300 hover:from-orange-600 hover:to-amber-600 hover:shadow-xl hover:shadow-orange-300/70 active:scale-95"
                 >
                   <FaShoppingBag className="h-4 w-4 transition-transform group-hover/btn:scale-110" />

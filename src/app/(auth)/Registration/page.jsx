@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import React from "react";
-import { FaGoogle, FaFacebook, FaShieldAlt } from "react-icons/fa";
+import { FaGoogle, FaFacebook, FaShieldAlt, FaArrowRight } from "react-icons/fa";
 import {
   MdEmail,
   MdLock,
@@ -69,6 +69,14 @@ const RegPage = () => {
   return (
     <div className="min-h-screen bg-linear-to-br from-blue-50 via-orange-50 to-amber-50 py-6 px-3 sm:py-8 sm:px-4 md:py-12 md:px-6">
       <div className="max-w-7xl mx-auto">
+        <p className="text-left text-sm font-medium text-gray-600 mb-6">
+          <Link
+            href="/"
+            className="flex items-center gap-2 text-gray-900 hover:text-gray-700 transition">
+            <FaArrowRight className="w-2 h-2" />
+            <span>Back to Home</span>
+          </Link>
+        </p>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 items-center">
           <div className="hidden lg:flex flex-col justify-center space-y-6 md:space-y-8">
             <div>

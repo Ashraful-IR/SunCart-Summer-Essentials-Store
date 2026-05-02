@@ -3,8 +3,8 @@
 import Link from "next/link";
 import React from "react";
 import { BiSolidCircle } from "react-icons/bi";
-import { FaShieldAlt } from "react-icons/fa";
-import { Fa0, FaFacebook, FaGoogle } from "react-icons/fa6";
+import { FaArrowRight, FaShieldAlt } from "react-icons/fa";
+import { Fa0, FaArrowRightArrowLeft, FaFacebook, FaGoogle } from "react-icons/fa6";
 import TextField from "@/components/UI/TextField";
 import { authClient } from "@/lib/auth-client";
 import { Bounce, toast } from "react-toastify";
@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 
 const LogPage = () => {
   const route = useRouter();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Handle form submission logic here
@@ -21,10 +22,14 @@ const LogPage = () => {
     console.log("Email:", email);
     console.log("Password:", password);
 
+    const callbackUrl =
+      typeof window !== "undefined"
+        ? new URLSearchParams(window.location.search).get("callbackUrl") || "/"
+        : "/";
+
     const { data, error } = await authClient.signIn.email({
       email,
       password,
-      
     });
     toast("Login successful!", {
       position: "top-right",
@@ -39,12 +44,20 @@ const LogPage = () => {
     });
 
     if (!error) {
-      route.push("/");
+      route.push(callbackUrl);
     }
   };
   return (
     <div className="min-h-screen bg-linear-to-br from-blue-50 via-orange-50 to-amber-50 flex items-center justify-center py-6 px-3 sm:py-8 sm:px-4 md:py-12 md:px-6">
       <div className="max-w-7xl mx-auto w-full">
+        <p className="text-left text-sm font-medium text-gray-600 mb-6">
+          <Link
+            href="/"
+            className="flex items-center gap-2 text-gray-900 hover:text-gray-700 transition">
+            <FaArrowRight className="w-2 h-2" />
+            <span>Back to Home</span>
+          </Link>
+        </p>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 items-center justify-center">
           <div className="hidden lg:flex flex-col justify-center space-y-6 md:space-y-8">
             <div>
