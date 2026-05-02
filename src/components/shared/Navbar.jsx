@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { BiSolidCircle } from "react-icons/bi";
 import { HiOutlineMenu } from "react-icons/hi";
@@ -19,9 +18,6 @@ const NavPage = () => {
     await authClient.signOut();
     router.refresh();
   };
-
-  const userInitial =
-    user?.name?.trim()?.[0] || user?.email?.trim()?.[0] || "U";
 
   const menuItems = (
     <>
@@ -68,7 +64,7 @@ const NavPage = () => {
                 <button
                   type="button"
                   onClick={handleLogout}
-                  className="hidden sm:inline-flex px-4 sm:px-5 py-2 sm:py-2.5 bg-gray-900 hover:bg-gray-800 text-white text-sm font-semibold rounded-lg transition shadow-md hover:shadow-lg"
+                  className="hidden sm:inline-flex px-4 sm:px-5 py-2 sm:py-2.5 bg-linear-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white text-sm font-semibold rounded-lg transition shadow-md hover:shadow-lg"
                 >
                   Logout
                 </button>
@@ -115,19 +111,7 @@ const NavPage = () => {
                         href="/MyProfile"
                         className="px-4 py-3 hover:bg-orange-50 hover:text-orange-600 transition border-b border-gray-100 flex items-center gap-3"
                       >
-                        {user?.image ? (
-                          <Image
-                            src={user.image}
-                            alt={user?.name || "User avatar"}
-                            width={28}
-                            height={28}
-                            className="w-7 h-7 rounded-full object-cover border border-orange-200"
-                          />
-                        ) : (
-                          <span className="w-7 h-7 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center text-sm font-semibold border border-orange-200">
-                            {userInitial}
-                          </span>
-                        )}
+                        <FaUserCircle className="w-7 h-7 text-orange-500" />
                         My Profile
                       </Link>
                       <button

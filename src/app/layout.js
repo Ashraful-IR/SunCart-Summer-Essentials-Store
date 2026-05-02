@@ -19,6 +19,9 @@ export const metadata = {
   title: "SunCart – Summer Essentials Store",
   description:
     "Discover the ultimate summer essentials at SunCart! From stylish swimwear and trendy sunglasses to beach accessories and outdoor gear, we have everything you need to make the most of your sunny days. Shop now and get ready for a season of fun in the sun!",
+  icons: {
+    icon: "/file.svg",
+  },
 };
 
 export default function RootLayout({ children }) {

@@ -1,7 +1,12 @@
 "use client";
 import Link from "next/link";
 import React from "react";
-import { FaGoogle, FaFacebook, FaShieldAlt, FaArrowRight } from "react-icons/fa";
+import {
+  FaGoogle,
+  FaFacebook,
+  FaShieldAlt,
+  FaArrowRight,
+} from "react-icons/fa";
 import {
   MdEmail,
   MdLock,
@@ -66,13 +71,34 @@ const RegPage = () => {
       route.push("/LogIn");
     }
   };
+  const handleGoogleSignIn = async () => {
+    await authClient.signIn.social({
+      provider: "google",
+    });
+    const { data, error } = await authClient.signIn.google();
+
+     if (!error) {
+      toast.success("Google sign-in successful! Redirecting...", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+    }
+  };
   return (
     <div className="min-h-screen bg-linear-to-br from-blue-50 via-orange-50 to-amber-50 py-6 px-3 sm:py-8 sm:px-4 md:py-12 md:px-6">
       <div className="max-w-7xl mx-auto">
         <p className="text-left text-sm font-medium text-gray-600 mb-6">
           <Link
             href="/"
-            className="flex items-center gap-2 text-gray-900 hover:text-gray-700 transition">
+            className="flex items-center gap-2 text-gray-900 hover:text-gray-700 transition"
+          >
             <FaArrowRight className="w-2 h-2" />
             <span>Back to Home</span>
           </Link>
@@ -328,7 +354,10 @@ const RegPage = () => {
                     Facebook
                   </span>
                 </button>
-                <button className="flex items-center justify-center gap-1 sm:gap-2 border border-gray-300 rounded-lg py-2 sm:py-2.5 hover:bg-gray-50 transition">
+                <button
+                  className="flex items-center justify-center gap-1 sm:gap-2 border border-gray-300 rounded-lg py-2 sm:py-2.5 hover:bg-gray-50 transition"
+                  onClick={handleGoogleSignIn}
+                >
                   <FaGoogle className="w-4 sm:w-5 h-4 sm:h-5 text-red-500" />
                   <span className="text-xs sm:text-sm font-medium text-gray-700 hidden sm:inline">
                     Google
@@ -338,7 +367,7 @@ const RegPage = () => {
 
               <div className="border-t border-gray-200 pt-4 sm:pt-6">
                 <p className="text-center text-gray-600 text-xs sm:text-sm">
-                  Already have an account?{" "}
+                  Already have an account?
                   <Link
                     href="/LogIn"
                     className="text-orange-600 hover:text-orange-700 font-semibold transition"

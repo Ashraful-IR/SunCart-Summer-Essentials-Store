@@ -47,6 +47,26 @@ const LogPage = () => {
       route.push(callbackUrl);
     }
   };
+    const handleGoogleSignIn = async () => {
+      await authClient.signIn.social({
+        provider: "google",
+      });
+      const { data, error } = await authClient.signIn.google();
+  
+       if (!error) {
+        toast.success("Google sign-in successful! Redirecting...", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
+      }
+    };
   return (
     <div className="min-h-screen bg-linear-to-br from-blue-50 via-orange-50 to-amber-50 flex items-center justify-center py-6 px-3 sm:py-8 sm:px-4 md:py-12 md:px-6">
       <div className="max-w-7xl mx-auto w-full">
@@ -222,7 +242,7 @@ const LogPage = () => {
                     <span className="hidden sm:inline">Facebook</span>
                   </span>
                 </button>
-                <button className="flex items-center justify-center gap-1.5 sm:gap-2 border border-gray-300 rounded-lg py-2 sm:py-2.5 hover:bg-gray-50 transition">
+                <button className="flex items-center justify-center gap-1.5 sm:gap-2 border border-gray-300 rounded-lg py-2 sm:py-2.5 hover:bg-gray-50 transition" onClick={handleGoogleSignIn}>
                   <span className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm font-medium text-black">
                     <FaGoogle color="red" size={16} />{" "}
                     <span className="hidden sm:inline">Google</span>
