@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { BiSolidCircle } from "react-icons/bi";
 import { HiOutlineMenu } from "react-icons/hi";
@@ -10,8 +11,8 @@ import NavLink from "../NavLink";
 
 const NavPage = () => {
   const router = useRouter();
-  const { data: session } = authClient.useSession();
-  const user = session?.user;
+  const userData = authClient.useSession();
+  const user = userData.data?.user;
   const isLoggedIn = Boolean(user);
 
   const handleLogout = async () => {
@@ -58,7 +59,19 @@ const NavPage = () => {
                   className="flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-full border border-orange-200 bg-orange-50 overflow-hidden shadow-sm"
                   title={user?.name || "My Profile"}
                 >
-                  <FaUserCircle className="w-5 h-5 text-gray-700" />
+                  {user?.image ? (
+                    <Image
+                      src={user.image}
+                      alt={user?.name || "User avatar"}
+                      referrerPolicy="no-referrer"
+                      width={44}
+                      height={44}
+                      unoptimized
+                      className="h-full w-full object-cover"
+                    />
+                  ) : (
+                    <FaUserCircle className="w-5 h-5 text-gray-700" />
+                  )}
                 </Link>
 
                 <button
@@ -111,7 +124,19 @@ const NavPage = () => {
                         href="/MyProfile"
                         className="px-4 py-3 hover:bg-orange-50 hover:text-orange-600 transition border-b border-gray-100 flex items-center gap-3"
                       >
-                        <FaUserCircle className="w-7 h-7 text-orange-500" />
+                        {user?.image ? (
+                          <Image
+                            src={user.image}
+                            alt={user?.name || "User avatar"}
+                            referrerPolicy="no-referrer"
+                            width={28}
+                            height={28}
+                            unoptimized
+                            className="h-7 w-7 rounded-full object-cover border border-orange-200"
+                          />
+                        ) : (
+                          <FaUserCircle className="w-7 h-7 text-orange-500" />
+                        )}
                         My Profile
                       </Link>
                       <button
