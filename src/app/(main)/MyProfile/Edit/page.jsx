@@ -37,6 +37,8 @@ const ProfileEditPage = () => {
                 Profile image URL
               </label>
               <input
+                value={url}
+                onChange={(e) => setUrl(e.target.value)}
                 name="url"
                 placeholder="https://example.com/avatar.jpg"
                 className="mt-2 w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
